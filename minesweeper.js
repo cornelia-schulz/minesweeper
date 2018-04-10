@@ -7,20 +7,36 @@ var board = {
 
 for(var i = 0; i < 6; i++){
   for(var j = 0; j < 6; j++){
-    console.log('{' + i + ', ' + j +'}');
-    board.cells.push({
-      row: i, 
-      col: j,
-      isMine: false,
-      hidden: true
-    });
+    //console.log('{' + i + ', ' + j +'}');
+    if (Math.floor(Math.random()*10) < 8){
+      board.cells.push({
+        row: i, 
+        col: j,
+        isMine: false,
+        hidden: true,
+        surroundingMines: 0
+      });
+    }
+    else {
+      board.cells.push({
+        row: i, 
+        col: j,
+        isMine: true,
+        hidden: true,
+        surroundingMines: 0
+      });
+    }
+    
     
   }
 }
 
 function startGame () {
   // Don't remove this function call: it makes the game work!
-  lib.initBoard()
+  lib.initBoard();
+  for(var i = 0; i < board.cells.length; i++){
+    board.cells[i].surroundingMines = countSurroundingMines(board.cells[i]);
+  }
 }
 
 // Define this function to look for a win condition:
@@ -43,5 +59,13 @@ function checkForWin () {
 // It will return cell objects in an array. You should loop through 
 // them, counting the number of times `cell.isMine` is true.
 function countSurroundingMines (cell) {
+  var surrounding = lib.getSurroundingCells(cell.row, cell.col);
+  var surroundingMines = 0;
+  for(var i = 0; i < surrounding.length; i++){
+    if (surrounding[i].isMine){
+      surroundingMines++;
+    }
+  }
+  return surroundingMines;
 }
 
