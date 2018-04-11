@@ -38,23 +38,42 @@ function checkForWin () {
   //   lib.displayMessage('You win!')
   //console.log("CheckForWin");
   var mines = 0;
+  var cleanCell = 0;
+  
   for (var g = 0; g <board.cells.length; g++){
     if (board.cells[g].isMine){
       mines++;
     }
+    else {
+      cleanCell++;
+    }
   }
 
   for (var i = 0; i < board.cells.length; i++){
-    if(board.cells[i].isMine && board.cells[i].isMarked){
+    var cell = board.cells[i];
+    if(cell.isMine && cell.isMarked){ // mine && (marked)
       mines--;
     }
-    else if(board.cells[i].isMine && !board.cells[i].hidden){
-      mines--;
+    else if(!cell.isMine && !cell.hidden){ // !mine && !hidden
+      cleanCell--;
     }
   }
   //console.log(mines);
-  if(mines === 0){
+  if(mines === 0 || cleanCell === 0){
     lib.displayMessage('You win!');
+  }
+  return true;
+}
+
+function resetGame() {
+  // check if user wins or loses
+  // if yes, reset the board
+  var mines = checkForWin();
+  var count = 0;
+  for (var i = 0; i < board.cells.length; i++){
+    if(board.cells[i].isMine && (board.cells[i].hidden || board.cells[i].isMarked)){
+
+    }
   }
 }
 
