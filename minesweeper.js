@@ -61,6 +61,7 @@ function checkForWin () {
   //console.log(mines);
   if(mines === 0 || cleanCell === 0){
     lib.displayMessage('You win!');
+    removeListeners();
   }
   return true;
 }
