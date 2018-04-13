@@ -68,6 +68,8 @@ function checkForWin () {
   //console.log(mines);
   if(mines === 0 || cleanCell === 0){
     lib.displayMessage('You win!');
+    var winningSound = new makeSound("sounds/Ta Da-SoundBible.com-1884170640.mp3");
+    winningSound.play();
     removeListeners();
   }
   return true;
@@ -105,3 +107,19 @@ function countSurroundingMines (cell) {
   }
   return surroundingMines;
 }
+
+function makeSound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+      this.sound.play();
+  }
+  this.stop = function(){
+      this.sound.pause();
+  }    
+}
+
