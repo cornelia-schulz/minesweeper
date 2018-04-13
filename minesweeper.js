@@ -1,24 +1,31 @@
 document.addEventListener ('DOMContentLoaded', startGame);
 
 // Define your `board` object here!
-var board = {
-  cells: [],
-};
+var board;
 
-for (var i = 0; i < 6; i++) {
-  for (var j = 0; j < 6; j++) {
-    board.cells.push ({
-      row: i,
-      col: j,
-      isMine: Math.floor (Math.random () * 100) >= 85,
-      isMarked: false,
-      hidden: true,
-      surroundingMines: 0,
-    });
+function createCells(){
+  var board = {
+    cells: [],
+  };
+  
+  for (var i = 0; i < 6; i++) {
+    for (var j = 0; j < 6; j++) {
+      board.cells.push ({
+        row: i,
+        col: j,
+        isMine: Math.floor (Math.random () * 100) >= 85,
+        isMarked: false,
+        hidden: true,
+        surroundingMines: 0,
+      });
+    }
   }
+  return board;
 }
 
+
 function startGame () {
+  board = createCells();
   // Don't remove this function call: it makes the game work!
   lib.initBoard ();
   for (var i = 0; i < board.cells.length; i++) {
@@ -66,16 +73,18 @@ function checkForWin () {
   return true;
 }
 
-function resetGame() {
-  // check if user wins or loses
-  // if yes, reset the board
-  var mines = checkForWin();
-  var count = 0;
-  for (var i = 0; i < board.cells.length; i++){
-    if(board.cells[i].isMine && (board.cells[i].hidden || board.cells[i].isMarked)){
+function clearBoard(){
+  var board = document.getElementsByClassName('board')[0];
+    board.innerHTML = '';
+}
 
-    }
-  }
+// A function to reset the board after the game has ended.
+// check if user wins or loses
+// if yes, reset the board
+function resetGame() {
+  removeListeners(); 
+  clearBoard();
+  startGame();
 }
 
 // Define this function to count the number of mines around the cell
