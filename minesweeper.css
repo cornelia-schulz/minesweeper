@@ -1,6 +1,6 @@
 html, body {
   height: 100%;
-  font-family: 'Open Sans', sans-serif
+  font-family: 'Open Sans', sans-serif;
 }
 
 body {
@@ -8,12 +8,20 @@ body {
   align-items: center;
   justify-content: flex-center;
   flex-direction: column;
+  height: 100%;
+  background-image: url("images/auckland.jpg"); 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #message, #notes {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: darkblue;
+  font-weight: 400;
+  font-size: 2em;
 }
 
 #message {
@@ -44,7 +52,7 @@ body {
 }
 
 div.mine, div.mine:hover {
-  background: no-repeat center/60% url("images/bomb.svg") crimson;
+  background: no-repeat center/90% url("images/skytower.jpg") crimson;
 }
 
 div.hidden {
@@ -57,4 +65,13 @@ div.hidden:hover {
 
 div.marked, div.marked:hover {
   background: no-repeat center/60% url("images/mark.svg") deepskyblue;
+}
+
+.button {
+  background-color: darkblue;
+  width: 100px;
+  height: 2.5em;
+  color: wheat;
+  border: 1px solid wheat;
+  border-radius: 5%;
 }
